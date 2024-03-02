@@ -91,7 +91,7 @@
     <section>
       <p class = "section-text">Examples!</p>
       <div class="caption-box">
-        <p> Where are the bombs? Try to solve them yourself then hover over for the answer
+        <p> Where are the bombs? Try to solve them yourself then hover over for the answerg
         </p>
       </div>
      
@@ -105,7 +105,7 @@
             {#if hoverIndex === index}
 
               <img src={hoveredImages[index].src} alt={hoveredImages[index].alt} class="hovered-image" />
-              <div class="caption-box">
+              <div class="caption-box2">
                 <p>{image.caption}</p>
               </div>
             {:else}
@@ -241,7 +241,7 @@ img {
 
   .caption-box2 {
     position: absolute;
-    bottom: -20px;
+    bottom: -100px;
     left: 0;
     right: 0;
     text-align: center;
