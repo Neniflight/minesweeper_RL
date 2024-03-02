@@ -1,0 +1,8 @@
+.writeup-container {
+    width: 80%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem;
+}

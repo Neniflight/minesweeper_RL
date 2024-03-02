@@ -1,8 +1,10 @@
 <script>
   // Write your JS here, or import other files
   import Scroller from "@sveltejs/svelte-scroller";
+  import { onMount, onDestroy } from 'svelte';
   let count, index, offset, progress;
-  let width, height;
+  let width, height, isVisible;
+  import { base } from '$app/paths';
 
   let hoverIndex = -1; // Index of the hovered image, -1 means no hover
   const images = [
@@ -17,6 +19,10 @@
     { src: "ex3flag.jpg", alt: "Minesweeper 3 (Hovered)", caption: "Caption 3 (Hovered)" }
   ];
 
+  $: isMinesweeperVisible = index === 0;
+  $: minesweeperOpacity = isMinesweeperVisible ? 1 : 0;
+  $: console.log(isMinesweeperVisible)
+
 </script>
 
 <main>
@@ -30,7 +36,7 @@
   bind:progress
 >
   <div class="background" slot="background" bind:clientWidth={width} bind:clientHeight={height}>
-
+    <img src="Minesweeper.png" alt="background" style="opacity: {minesweeperOpacity}; transition: opacity 1s; width:100%; ">
     <div class="progress-bars">
       <p>current section: <strong>{index + 1}/{count}</strong></p>
       <progress value={count ? (index + 1) / count : 0} />
@@ -48,6 +54,7 @@
         <img src="title.jpg" alt="Image 2" />
         <img src="flag.jpg" alt="Image 3" />
       </div>
+      <a href="{base}/writeup">Link to Writeup</a>
     </section>
     <section>
       <p class = "section-text">What is Minesweeper?</p>
@@ -91,7 +98,7 @@
     <section>
       <p class = "section-text">Examples!</p>
       <div class="caption-box">
-        <p> Where are the bombs? Try to solve them yourself then hover over for the answerg
+        <p> Where are the bombs? Try to solve them yourself then hover over for the answer!
         </p>
       </div>
      
@@ -137,7 +144,6 @@
     position: relative;
     outline: red solid 3px;
   }
-
   .progress-bars {
     position: absolute;
     background: rgba(170, 51, 120, 0.2) /*  40% opaque */;
@@ -213,6 +219,10 @@ img {
   font-family:  'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', sans-serif;; /* Change font as needed */
   }
 
+  p, a {
+    background-color: rgba(255, 255, 255, 0.8); /* Adjust background color and opacity as needed */
+  } 
+
 
   .image-row2 {
     display: flex;
@@ -254,5 +264,16 @@ img {
 
   .image-container:hover .caption-box2 {
     opacity: 1; /* Show caption box on hover */
+  }
+
+  @keyframes flyIn {
+    from {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
 </style>
